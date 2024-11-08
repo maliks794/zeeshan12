@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Sharing App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .upload-form {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .file-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .file-list li {
+            margin-bottom: 10px;
+        }
+        .file-list a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<h1>File Sharing App</h1>
+
+<!-- File upload form -->
+<div class="upload-form">
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".txt,.pdf,.png,.jpg,.jpeg,.gif,.zip" required>
+        <button type="submit">Upload File</button>
+    </form>
+</div>
+
+<!-- List uploaded files -->
+<h2>Uploaded Files</h2>
+<ul class="file-list">
+    {% for file in files %}
+        <li>
+            <a href="{{ url_for('download_file', filename=file) }}" target="_blank">{{ file }}</a> 
+            <a href="{{ url_for('delete_file', filename=file) }}" style="color: red;">[Delete]</a>
+        </li>
+    {% endfor %}
+</ul>
+
+</body>
+</html>
